@@ -6,15 +6,14 @@ import (
 	"strconv"
 )
 
-
-const biggestPossibleNumberToGuess = 100;
+const biggestPossibleNumberToGuess = 100
 
 func main() {
-    fmt.Println("Please Guess the number in range 0..99")
+	fmt.Println("Please Guess the number in range 0..99")
 	var numberToGuess = rand.Intn(biggestPossibleNumberToGuess)
-	fmt.Printf("The number is %d\n", numberToGuess)
+	//fmt.Printf("The number is %d\n", numberToGuess)
 	var guessCount = 0
-	
+
 	guessedRight := false
 	for !guessedRight {
 		fmt.Printf("Try to guess number\n")
@@ -32,23 +31,30 @@ func main() {
 				if guessInt < 0 || guessInt >= biggestPossibleNumberToGuess {
 					fmt.Println("Please choose positive number below 100")
 				} else {
-					guessCount ++
-		
-					var message string 
+					guessCount++
+
+					var message string
 					guessedRight, message = evaluateAnswer(numberToGuess, guessInt)
-			
-					fmt.Println(message);
-				}	
+
+					fmt.Println(message)
+				}
 			}
-		}		
-	} 
+		}
+	}
 	fmt.Printf("Guess the number with %d attempts\n", guessCount)
 }
 
 func evaluateAnswer(answer, guess int) (quessedRight bool, message string) {
-	// This function need to return 2 values 
+	// This function need to return 2 values
 	// 1) guessedRight boolean value which should be true, if guess is equal to answer and false otherwise
-	// 2) message should indicate if guess is bigger or smaller than the answer and  
+	// 2) message should indicate if guess is bigger or smaller than the answer and
 
-	return answer == guess, "Logic hasn't been implemented"
+	if answer < guess {
+		return false, "Your number is bigger than the guessed number. Try again."
+	} else if answer > guess {
+		return false, "Your number is smaller than the guessed number. Try again."
+	} else {
+		return true, "You won! Good job!"
+	}
+	//return answer == guess, "Logic hasn't been implemented"
 }
